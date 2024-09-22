@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { makeWASocket, DisconnectReason, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const Boom = require('@hapi/boom');
 const qrcode = require('qrcode-terminal');
@@ -7,6 +8,12 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Use CORS
+// Allow specific origins or an array of origins
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://caawiye-bots.vercel.app']
+}));
 
 // Initialize OpenAI
 const openai = new OpenAI({
